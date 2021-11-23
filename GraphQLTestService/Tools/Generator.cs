@@ -11,8 +11,8 @@ namespace Tools
       return new List<Person>
       {
         GetDefaultPerson(1, "Ivan"),
-        GetDefaultPerson(2, "Max"),
-        GetDefaultPerson(3, "Vika")
+        GetDefaultPerson(2, "Vika"),
+        GetDefaultPerson(3, "Max")
       };
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Contracts.BasicTypes;
 using Contracts.Schemas;
+using FluentAssertions;
 using NUnit.Framework;
 using Tools;
 
@@ -26,7 +27,7 @@ namespace Tests
         Generator.GetDefaultPerson(3, "Max")
       };
 
-      Assert.That(people.Equals(Generator.GetPeople()));
+      _ = people.Should().BeEquivalentTo(Generator.GetPeople());
     }
 
     [TestCase("{ person { name } }", ExpectedResult = @"{ ""data"": { ""person"": { ""name"": ""Ivan"" } }")]
