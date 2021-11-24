@@ -32,8 +32,7 @@ namespace Tests
       _ = people.Should().BeEquivalentTo(Generator.GetPeople());
     }
 
-    [TestCase("{ person { name } }", ExpectedResult = @"{ ""data"": { ""person"": { ""name"": ""Ivan"" } }")]
-    [TestCase("{ person { id, name, city, birthDate, doc { number, type } } }", ExpectedResult = @"{ ""data"": { ""person"": { ""name"": ""Ivan"" } }")]
+    [Test, TestCaseSource(typeof(TestData), nameof(TestData.PersonDataJson))]
     public async Task<string> GetPersonJson(string query)
     {
       return await executor.ExecuteAsync<PersonQuerySchema>(query);
