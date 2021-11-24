@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Contracts.BasicTypes;
 using Contracts.Schemas;
 using FluentAssertions;
@@ -8,6 +9,7 @@ using Tools;
 namespace Tests
 {
   [TestFixture]
+  [Parallelizable]
   public class Units
   {
     private readonly QueryExecutor executor;
@@ -32,9 +34,9 @@ namespace Tests
 
     [TestCase("{ person { name } }", ExpectedResult = @"{ ""data"": { ""person"": { ""name"": ""Ivan"" } }")]
     [TestCase("{ person { id, name, city, birthDate, doc { number, type } } }", ExpectedResult = @"{ ""data"": { ""person"": { ""name"": ""Ivan"" } }")]
-    public string GetPersonJson(string query)
+    public async Task<string> GetPersonJson(string query)
     {
-      return executor.ExecuteAsync<PersonQuerySchema>(query).GetAwaiter().GetResult();
+      return await executor.ExecuteAsync<PersonQuerySchema>(query);
     }
   }
 }
