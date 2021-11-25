@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Contracts.BasicTypes;
 
-namespace Tools
+namespace Tools.Impl
 {
-  public static class Generator
+  public class Generator : IGenerator
   {
-    public static IEnumerable<Person> GetPeople()
+    public IEnumerable<Person> GetPeople()
     {
       return new List<Person>
       {
@@ -16,7 +16,7 @@ namespace Tools
       };
     }
 
-    public static Person GetDefaultPerson(int personId = 1, string personName = "Ivan")
+    public Person GetDefaultPerson(int personId = 1, string personName = "Ivan")
     {
       return new Person
       {

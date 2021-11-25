@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Contracts.Schemas;
+using Microsoft.Extensions.DependencyInjection;
 using Tools;
 
 namespace GraphQLTestService
 {
-  public class Program
+  public class Program : Installer
   {
+    private static readonly IQueryExecutor executor;
+
+    static Program()
+    {
+      Install();
+      executor = provider.GetService<IQueryExecutor>();
+    }
+
     public static void Main()
     {
       MainAsync().GetAwaiter().GetResult();
@@ -14,7 +23,6 @@ namespace GraphQLTestService
 
     public static async Task MainAsync()
     {
-      QueryExecutor executor = new QueryExecutor();
       string json = await executor.ExecuteAsync<PersonQuerySchema>("{ person { name } }");
 
       Console.Write(json);

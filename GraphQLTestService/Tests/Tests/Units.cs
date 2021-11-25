@@ -4,19 +4,24 @@ using Contracts.BasicTypes;
 using Contracts.Schemas;
 using FluentAssertions;
 using NUnit.Framework;
+using Tests.Data;
 using Tools;
+using Tools.Impl;
 
 namespace Tests
 {
   [TestFixture]
-  [Parallelizable]
+  [Parallelizable(ParallelScope.All)]
   public class Units
   {
-    private readonly QueryExecutor executor;
-
-    public Units()
+    private IQueryExecutor executor;
+    private IGenerator generator;
+    
+    [OneTimeSetUp]
+    public void SetUp()
     {
       executor = new QueryExecutor();
+      generator = new Generator();
     }
 
     [Test]
@@ -24,12 +29,12 @@ namespace Tests
     {
       List<Person> people = new List<Person>()
       {
-        Generator.GetDefaultPerson(1, "Ivan"),
-        Generator.GetDefaultPerson(2, "Vika"),
-        Generator.GetDefaultPerson(3, "Max")
+        generator.GetDefaultPerson(1, "Ivan"),
+        generator.GetDefaultPerson(2, "Vika"),
+        generator.GetDefaultPerson(3, "Max")
       };
 
-      _ = people.Should().BeEquivalentTo(Generator.GetPeople());
+      _ = people.Should().BeEquivalentTo(generator.GetPeople());
     }
 
     [Test, TestCaseSource(typeof(TestData), nameof(TestData.PersonDataJson))]

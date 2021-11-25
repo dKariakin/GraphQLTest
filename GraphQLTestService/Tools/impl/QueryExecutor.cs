@@ -4,9 +4,9 @@ using GraphQL;
 using GraphQL.SystemTextJson;
 using GraphQL.Types;
 
-namespace Tools
+namespace Tools.Impl
 {
-  public class QueryExecutor
+  public class QueryExecutor : IQueryExecutor
   {
     private readonly IDocumentExecuter executer;
     private readonly IDocumentWriter writer;
