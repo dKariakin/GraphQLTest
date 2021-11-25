@@ -10,7 +10,7 @@ namespace Tests.Data
       yield return new TestCaseData("{ person { name } }")
         .Returns(@"{ ""data"": { ""person"": { ""name"": ""Ivan"" } }");
       yield return new TestCaseData("{ person { id, name, city, birthDate, doc { number, type } } }")
-        .Returns(@"{ ""data"": { ""person"": { ""name"": ""Ivan"" } }");
+        .Returns(@"{ ""data"": { ""person"": { ""id"": 1, ""name"": ""Ivan"", ""city"": ""Moscow"", ""birthDate"": ""1980-05-10"", ""doc"": { ""number"": 400, ""type"": ""PASSPORT"" } } }");
     }
   }
 }
